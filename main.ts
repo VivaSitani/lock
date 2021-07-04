@@ -1,33 +1,27 @@
-pins.servoWritePin(AnalogPin.P1, 0)
-pins.digitalWritePin(DigitalPin.P0, 0)
-pins.digitalWritePin(DigitalPin.P2, 0)
-basic.forever(function () {
-    if (input.buttonIsPressed(Button.A)) {
-        if (input.buttonIsPressed(Button.B)) {
-            if (input.buttonIsPressed(Button.B)) {
-                if (input.buttonIsPressed(Button.A)) {
-                    if (input.buttonIsPressed(Button.B)) {
-                        if (input.buttonIsPressed(Button.A)) {
-                            if (input.buttonIsPressed(Button.A)) {
-                                if (input.buttonIsPressed(Button.A)) {
-                                    if (input.buttonIsPressed(Button.B)) {
-                                        if (input.buttonIsPressed(Button.A)) {
-                                            pins.digitalWritePin(DigitalPin.P0, 0)
-                                            pins.servoWritePin(AnalogPin.P1, 180)
-                                            pins.digitalWritePin(DigitalPin.P2, 1)
-                                        } else if (input.buttonIsPressed(Button.B)) {
-                                            pins.digitalWritePin(DigitalPin.P0, 1)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+input.onButtonPressed(Button.A, function () {
+    temp = "" + user_key + "A"
+    user_key = temp
+    serial.writeLine("" + (user_key))
+    if (user_key == key) {
+        pins.digitalWritePin(DigitalPin.P0, 1)
     }
 })
+input.onButtonPressed(Button.B, function () {
+    temp = "" + user_key + "B"
+    user_key = temp
+    serial.writeLine("" + (user_key))
+    if (user_key == key) {
+        pins.digitalWritePin(DigitalPin.P0, 1)
+        basic.pause(100)
+        pins.servoWritePin(AnalogPin.P1, 0)
+    }
+})
+let temp = ""
+let user_key = ""
+let key = ""
+pins.servoWritePin(AnalogPin.P1, 180)
+key = "ABBABAAABA"
+user_key = ""
 basic.forever(function () {
 	
 })
